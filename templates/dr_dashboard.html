@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <div style="text-align: right;"><input type="text" name="searchtxt"> | <input type="button" value="Search"></div>
+    <div class="dashboard-form">
+        <form>
+        <h3 class="center">Admin Dashboard</h3>
+        <table class="center" name="Doctors" border="1">
+        <caption>Registered Doctors</caption>
+        <tr><td>Doctor name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
+        <tr><td>Doctor name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
+        </table>
+
+        <table class="center" name="Patients" border="1">
+        <caption>Registered Patients</caption>
+        <tr><td>Patient name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
+        <tr><td>Patient name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
+        </table>
+
+        <table class="center" name="Appointments" border="1">
+        <caption>Upcoming Appointments</caption>
+        <tr><th>Patient</th><th>Doctor</th><th>Specilization</th><th>Action</th></tr>
+        {% for d in app_data %}
+            <tr><td>{{d.pname}}</td><td>{{d.dname}}</td><td>{{d.spz}}</td><td><input type="button" value="View"></td></tr>
+        {% endfor %}
+        </table>
+
+        </form>
+    </div> 
+{% endblock %}
