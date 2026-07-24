@@ -19,17 +19,14 @@
         <tr><td><label>Full name: </label></td><td><input type="text" name="fname"></td></tr>
         <tr><td><label>User type: </label></td>
             <td>
-                <select name="utype" onchange="hide_show_other_details()">
-                    <option value="None" selected>None</option>
-                    <option value="2">Patient</option>
+                <select name="utype" id="utype" onchange="hide_show_other_details()">
+                    <option value="2" selected>Patient</option>
                     <option value="1">Doctor</option>
                 </select>
             </td>
         </tr>
-        <div id="dr_details" style="display: none;"> <!-- default hide this -->
-            <tr><td><label>Specilization: </label></td><td><input type="text" name="splz"></td></tr>
-            <tr><td><label>Experience(Yrs): </label></td><td><input type="text" name="exp"></td></tr>
-        </div>
+        <tr id="dr_details1" style="display: none;"><td><label>Specilization: </label></td><td><input type="text" name="splz"></td></tr>
+        <tr id="dr_details2" style="display: none;"><td><label>Experience(Yrs): </label></td><td><input type="text" name="exp"></td></tr>
         <tr><td><label>Address: </label></td><td><textarea rows=5 cols=20 name="address"></textarea></td></tr>
         <tr><td><label>Phone no: </label></td><td><input type="text" name="phno"></td></tr>
         <tr><td><input type="submit" value="Signup"></td><td><a href="login.html">Existing User?</a></td></tr>
@@ -38,16 +35,16 @@
         </form>
         <script>
             function hide_show_other_details() {
-                console.log("Enter hide/show fuction");
-                const utype = document.getElementsByName("utype"); //drop down list
+                const utype = document.getElementById("utype"); //drop down list
             
-                const dr_details = document.getElementById("dr_details");
-  
-                // If the user selects 'other', show the field. Otherwise, hide it.
-                if (utype.value === "None" && utype.value=="Patient") {
-                    dr_details.style.display = "none";
+                const dr_details1 = document.getElementById("dr_details1");
+                const dr_details2 = document.getElementById("dr_details2");
+                if (utype.value=="2") {
+                    dr_details1.style.display = "none";
+                    dr_details2.style.display = "none";
                 } else {
-                        dr_details.style.display = "block";
+                        dr_details1.style.display = "table-row";
+                        dr_details2.style.display = "table-row";
                     }
                 }
         </script>

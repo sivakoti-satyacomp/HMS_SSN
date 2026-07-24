@@ -11,13 +11,14 @@
     <div class="center"><h2>Welcome to ABC Hospital</h2></div>
 
     <div class="input-form">
-        <form>
+        <form action="/update_dr" method="POST">
         <h3 class="center">Edit Doctor Details</h3>
         <table class="center">
-        <tr><td><label>Doctor name: </label></td><td><input type="text" name="d_name"></td></tr>
-        <tr><td><label>Specilization: </label></td><td><input type="text" name="splz"></td></tr>
-        <tr><td><label>Experience: </label></td><td><input type="text" name="exp"></td></tr>
-        <tr><td><label>Address: </label></td><td><textarea rows=5 cols=20 name="address"></textarea></td></tr>
+        <tr><td><label>User id: </label></td><td><input type="text" name="uid" value="{{dr_data.dr_id}}" readonly></td></tr>
+        <tr><td><label>Doctor name: </label></td><td><input type="text" name="d_name" value="{{dr_data.full_name}}"></td></tr>
+        <tr><td><label>Specilization: </label></td><td><input type="text" name="splz" value="{{dr_data.spl}}"></td></tr>
+        <tr><td><label>Experience: </label></td><td><input type="text" name="exp" value="{{dr_data.exp}}"></td></tr>
+        <tr><td><label>Address: </label></td><td><textarea rows=5 cols=20 name="address">{{dr_data.address}}</textarea></td></tr>
         <tr><td><input type="submit" value="Update"></td></tr>
         </table>
         </form>

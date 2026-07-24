@@ -6,14 +6,19 @@
         <h3 class="center">Admin Dashboard</h3>
         <table class="center" name="Doctors" border="1">
         <caption>Registered Doctors</caption>
-        <tr><td>Doctor name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
-        <tr><td>Doctor name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
+        
+        <tr><th>Name</th><th>Specilization</th><th colspan="3">Actions</th></tr>
+        {% for d in dr_data %}
+            <tr><td>{{d.full_name}}</td><td>{{d.spl}}</td><td><a href="#" class='btn-link'>Approve</a></td><td><a href="/ed_dr?dr_id={{d.dr_id}}" class='btn-link btn-done'>Edit</a></td><td><a href="#" class='btn-link btn-danger'>Deactivate</a></td></tr>
+        {% endfor %}
         </table>
 
         <table class="center" name="Patients" border="1">
         <caption>Registered Patients</caption>
-        <tr><td>Patient name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
-        <tr><td>Patient name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
+        <tr><th>Name</th><th>Phone no.</th><th colspan="2">Actions</th></tr>
+        {% for p in pt_data %}
+            <tr><td>{{p.full_name}}</td><td>{{p.phno}}</td><td><a href="#" class='btn-link'>Edit</a></td><td><a href="#" class='btn-link btn-danger'>Deactivate</a></td></tr>
+        {% endfor %}
         </table>
 
         <table class="center" name="Appointments" border="1">

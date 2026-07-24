@@ -10,8 +10,8 @@
 
 .input-form{
     border: 1px solid blue;
-    width: 600px;
-    height: 350px;
+    /*width: 600px;
+    height: 350px;*/
     margin: auto;
     border-radius: 10px;
     font-size: 16px;
@@ -23,4 +23,46 @@
     margin: auto;
     border-radius: 10px;
     font-size: 14px;
+}
+
+
+.btn-link {
+  /* padding and margins to behave correctly */
+  display: inline-block;    
+  
+  /* dimensions and spacing */
+  padding: 4px 10px;
+  
+  /* Adjustments */
+  text-decoration: none; /* Removes the default underline */
+  font-family: sans-serif;
+  font-weight: bold;
+  
+  /* Coloured Button  */
+  background-color: #007bff;
+  color: #ffffff;
+  border-radius: 4px;
+  
+  /* Interactive transition */
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+/* Hover state for user feedback */
+.btn-link:hover {
+  background-color: #0056b3;
+}
+
+/* red Button  */
+.btn-danger{
+  background-color: maroon;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+/* green Button  */
+.btn-done{
+  background-color: darkgreen;
+  color: #ffffff;
+  border-radius: 4px;
 }
