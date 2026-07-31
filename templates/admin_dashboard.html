@@ -9,7 +9,7 @@
         
         <tr><th>Name</th><th>Specilization</th><th colspan="3">Actions</th></tr>
         {% for d in dr_data %}
-            <tr><td>{{d.full_name}}</td><td>{{d.spl}}</td><td><a href="#" class='btn-link'>Approve</a></td><td><a href="/ed_dr?dr_id={{d.dr_id}}" class='btn-link btn-done'>Edit</a></td><td><a href="#" class='btn-link btn-danger'>Deactivate</a></td></tr>
+            <tr><td>{{d.full_name}}</td><td>{{d.spl}}</td><td><a href="/approve_dr?dr_id={{d.dr_id}}" class='btn-link {% if d.status == 1 %} disabled-link {% endif %}' >Approve</a></td><td><a href="/ed_dr?dr_id={{d.dr_id}}" class='btn-link btn-done'>Edit</a></td><td><a href="#" class='btn-link btn-danger'>Deactivate</a></td></tr>
         {% endfor %}
         </table>
 

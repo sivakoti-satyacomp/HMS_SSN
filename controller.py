@@ -1,6 +1,7 @@
 from flask import current_app as app
 from flask import render_template,request,redirect,url_for
 from models import *
+from datetime import datetime,timedelta
 
 @app.route("/")
 def home():
@@ -14,7 +15,7 @@ def signin():
         pwd=request.form.get("pwd")
         user=db.session.query(User_Credentials).filter(User_Credentials.email==uname,User_Credentials.password==pwd).first()
         if user and user.role==0:
-            return render_template("admin_dashboard.html")
+            return redirect(url_for("admin_dashboard"))
         elif user and user.role==1:
             return render_template("dr_dashboard.html")
         elif user and user.role==2:
@@ -53,10 +54,15 @@ def signup():
                 dr_profile=Dr_Profile(dr_id=uc.id,full_name=fname,address=address,phno=phno,spl=splz,exp=exp)
                 db.session.add(dr_profile) #if it dr role
             db.session.commit() #Save everything
+            return redirect(url_for("signin"))
     else:
         #request type is get
         return render_template("signup.html")
 
+
+'''
+    Routes defined for admin dashboard
+'''
 
 @app.route("/admin")
 def admin_dashboard():
@@ -64,6 +70,7 @@ def admin_dashboard():
     pt_data=get_all_pts()
     return render_template("admin_dashboard.html",dr_data=dt_data, pt_data=pt_data)
 
+#Editing doctor
 @app.route("/ed_dr")
 def edit_dr():
     #render with specific dr data??
@@ -71,6 +78,17 @@ def edit_dr():
     dr_searched=search_dr(dr_id)
     return render_template("edit_doctor.html",dr_data=dr_searched)
 
+#Approve doctor
+@app.route("/approve_dr")
+def approve_dr():
+    #render with specific dr data??
+    dr_id=request.args.get("dr_id") #got query param
+    dr_searched=search_dr(dr_id)
+    dr_searched.status=1
+    db.session.commit()
+    return redirect(url_for("admin_dashboard"))
+
+#Update doctor
 @app.route("/update_dr",methods=["GET","POST"])
 def update_dr():
     uid=request.form.get("uid")
@@ -87,6 +105,40 @@ def update_dr():
     db.session.commit() #saved
     return redirect(url_for("admin_dashboard"))
 
+
+#Editing patient
+@app.route("/ed_pt")
+def edit_patient():
+    #render with specific dr data??
+    dr_id=request.args.get("dr_id") #got query param
+    dr_searched=search_dr(dr_id)
+    return render_template("edit_doctor.html",dr_data=dr_searched)
+
+
+#Update patient
+@app.route("/update_pt",methods=["GET","POST"])
+def update_patient():
+    uid=request.form.get("uid")
+    name=request.form.get("d_name")
+    splz=request.form.get("splz")
+    exp=request.form.get("exp")
+    address=request.form.get("address")
+    old_dr_details=db.session.query(Dr_Profile).filter(Dr_Profile.dr_id==uid).first()
+    #update
+    old_dr_details.full_name=name
+    old_dr_details.spl=splz
+    old_dr_details.exp=exp
+    old_dr_details.address=address
+    db.session.commit() #saved
+    return redirect(url_for("admin_dashboard"))
+
+
+
+
+
+'''
+Routes for Dr dashboard
+'''
 @app.route("/dr")
 def dr_dashboard():
     return render_template("dr_dashboard.html")
@@ -95,10 +147,57 @@ def dr_dashboard():
 def patient_history():
     return render_template("patient_history.html")
 
-
 @app.route("/pt_history/update")
 def patient_history_update():
     return render_template("update_pt_history.html")
+
+
+@app.route("/dr_availability/<id>")
+def dr_avail(id):
+    next_seven=generate_next_appts()
+    return render_template("update_dr_avail.html",dr_av=next_seven,id=id)
+    
+@app.route("/update_availability",methods=["GET","POST"])
+def save_avail():
+    if request.method=="POST":
+        dr_id=int(request.form.get("id"))
+        dt=request.form.get("dt")
+        fn=request.form.getlist("fn[]")
+        an=request.form.getlist("an[]")
+        #maxp=request.form.get("nop")
+        # print("Max patient: ",maxp,dr_id)
+        # print("date: ",dt,"FN: ",fn,"an: ",an) #['2026-08-01:9am-12Noon', '2026-08-03:9am-12Noon']
+        print("dr_id : ",dr_id)
+        for d in fn:
+            day,time=d.split(":")
+            day=datetime.strptime(day,'%Y-%m-%d').date()
+            #print(day,time)
+            dr_avail=Dr_Availability(dr_id=dr_id,avail_date=day,session=time)
+            db.session.add(dr_avail)
+            db.session.commit()
+
+        for d in an:
+            day,time=d.split(":")
+            #print(day,time)
+            day=datetime.strptime(day,'%Y-%m-%d').date()
+            dr_avail=Dr_Availability(dr_id=dr_id,avail_date=day,session=time)
+            db.session.add(dr_avail)
+            db.session.commit()
+                
+
+      
+        
+      
+
+        
+            
+    
+    return redirect(url_for("admin_dashboard"))
+
+    
+
+
+
 
 
 #Additional python functions
@@ -115,3 +214,9 @@ def search_dr(id):
     dr_searched=db.session.query(Dr_Profile).filter(Dr_Profile.dr_id==id).first()
     return dr_searched
     
+
+def generate_next_appts():
+    today=datetime.now().date()
+    #generate next 7days
+    days_7=[today+timedelta(days=i) for i in range(1,8)]
+    return days_7

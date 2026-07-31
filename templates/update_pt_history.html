@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/main.css">
-    <title>Register</title>
-</head>
-<body>
-<div class="container">
-    <div class="center"><h2>Welcome to ABC Hospital</h2></div>
-
+{% extends "base.html" %}
+{% block content %}
     <div class="input-form">
         <div class="center"><h3>Update Patient History</h3></div>
         <div><label>Patient Name : </label><label>xxxxxx</label></div>
@@ -26,7 +16,4 @@
         </form>
     </div> 
 
-<div class="center">Copy rights reseved to ABC Hospitals, 2026</div>
-</div>
-</body>
-</html>
+{% endblock %}

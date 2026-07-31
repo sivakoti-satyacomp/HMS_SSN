@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="input-form">
+        <div class="center"><h3>Availability of {{id}}</h3></div>
+        <form action="/update_availability" method="POST">
+        <input type="text" name="id" value="{{id}}" hidden>
+        <table class="center">
+        {% for d in dr_av %}
+            <tr><td><input type="text" name="dt" value="{{d}}" readonly></td><td><input type="checkbox" value="{{d}}:9am-12Noon" name="fn[]"></td><td><input type="checkbox" value="{{d}}:5pm-8pm" name="an[]"></td><td><input type="text" name="nop"></td></tr>
+        {%endfor%}
+    
+ <!-- <label><input type="checkbox" name="hobbies[]" value="reading"> Reading</label>
+  <label><input type="checkbox" name="hobbies[]" value="sports"> Sports</label>
+  <label><input type="checkbox" name="hobbies[]" value="music"> Music</label>
+  <button type="submit">Submit</button> -->
+
+
+
+        <tr><td colspan="2"><input type="submit" value="Save Availability"></td></tr>
+        </table>
+        <h6>{{err_msg}}</h6>
+        </form>
+    </div> 
+
+{% endblock %}

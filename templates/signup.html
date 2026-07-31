@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/main.css">
-    <title>Register</title>
-</head>
-<body>
-<div class="container">
-    <div class="center"><h2>Welcome to ABC Hospital</h2></div>
-
+{% extends "base.html" %}
+{% block content %}
     <div class="input-form">
         <form action="/register" method="POST">
         <h3 class="center">Register New User</h3>
@@ -29,7 +19,7 @@
         <tr id="dr_details2" style="display: none;"><td><label>Experience(Yrs): </label></td><td><input type="text" name="exp"></td></tr>
         <tr><td><label>Address: </label></td><td><textarea rows=5 cols=20 name="address"></textarea></td></tr>
         <tr><td><label>Phone no: </label></td><td><input type="text" name="phno"></td></tr>
-        <tr><td><input type="submit" value="Signup"></td><td><a href="login.html">Existing User?</a></td></tr>
+        <tr><td><input type="submit" value="Signup"></td><td><a href="/login">Existing User?</a></td></tr>
         </table>
         <h6>{{err_msg}}</h6>
         </form>
@@ -49,8 +39,4 @@
                 }
         </script>
     </div> 
-
-<div class="center">Copy rights reseved to ABC Hospitals, 2026</div>
-</div>
-</body>
-</html>
+{% endblock %}

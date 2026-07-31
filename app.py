@@ -7,9 +7,13 @@ app=None
 def setup_app():
     app=Flask(__name__)
     app.config["SQLALCHEMY_DATABASE_URI"]="sqlite:///hms.sqlite3"
+    app.url_map.strict_slashes = False  
     db.init_app(app) #linking between db and flask
     app.app_context().push() #Giving accees of my current app to other modules
     print("HMS app is setup done...")
+
+def test():
+    print("Hello")
 
 #executable of flask
 setup_app() #calling
