@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard-form">
+        <form>
+        <h3 class="center">{{dr_details.full_name}}</h3>
+        
+        <table class="center" name="Doctor">
+            <caption><b>Details</b></caption>
+            <tr><td>MBBS, Specialist in {{dr_details.spl}}</td><td>{{dr_details.exp}} years</td></tr>
+            <tr><td><a href="/book_appointment/{{dr_details.dr_id}}" class='btn-link btn-info'>Take appointment</a></td><td><a href="/drs_by_spl/{{dr_details.spl}}" class='btn-link btn-info'>Go back</a></td></tr>
+        </table>
+
+        </form>
+    </div> 
+{%endblock%}

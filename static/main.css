@@ -53,6 +53,13 @@
   background-color: #0056b3;
 }
 
+/* Blue Button  */
+.btn-info{
+  background-color: rgb(86, 192, 218);
+  color: hsl(0, 14%, 96%);
+  border-radius: 4px;
+}
+
 /* red Button  */
 .btn-danger{
   background-color: maroon;

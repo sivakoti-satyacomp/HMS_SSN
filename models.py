@@ -1,9 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_login import UserMixin #Protecting routes
 
 db=SQLAlchemy()
 
-class User_Credentials(db.Model):
+class User_Credentials(db.Model,UserMixin): #Inherit credentials with UserMixin
     __tablename__='user_credentials'
     id=db.Column(db.Integer,primary_key=True)
     email=db.Column(db.String,unique=True,nullable=False)
@@ -65,7 +66,7 @@ class Appointments(db.Model):
 
 
 class Consultation_Details(db.Model):
-    __tablename__='donsultation_details'
+    __tablename__='consultation_details'
     id=db.Column(db.Integer,primary_key=True)
     apt_id=db.Column(db.Integer,db.ForeignKey('appointments.id'),nullable=False) #linking child to parent
     consult_dt_time=db.Column(db.String,nullable=False)

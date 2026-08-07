@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-    <div style="text-align: right;"><input type="text" name="searchtxt"> | <input type="button" value="Search"></div>
     <div class="dashboard-form">
         <form>
-        <h3 class="center">Welcome Dr.xxxxxx</h3>
+        <h3 class="center">Welcome Dr.{{id}}</h3>
         <table class="center" name="Doctors" border="1">
         <caption>Upcoming Appointments</caption>
         <tr><th>Sl.no.</th><th>Patient name</th><th>Patient History</th><th colspan="2">Action</th></tr>
@@ -18,14 +17,7 @@
         <tr><td>Patient name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
         <tr><td>Patient name</td><td><input type="button" value="Edit"></td><td><input type="button" value="Delete"</td><td><input type="button" value="Blacklist"</td></tr>
         </table>
-
-        <table class="center" name="Appointments" border="1">
-        <caption>Upcoming Appointments</caption>
-        <tr><th>Patient</th><th>Doctor</th><th>Specilization</th><th>Action</th></tr>
-        {% for d in app_data %}
-            <tr><td>{{d.pname}}</td><td>{{d.dname}}</td><td>{{d.spz}}</td><td><input type="button" value="View"></td></tr>
-        {% endfor %}
-        </table>
+        <div><a href="/dr_availability/{{id}}" class='btn-link btn-done'>Provide Availablity</a></div> 
 
         </form>
     </div> 
